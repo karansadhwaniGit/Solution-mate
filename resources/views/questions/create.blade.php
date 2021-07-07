@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label for="">Enter Question</label>
                                 <input type="hidden" id="body" name="body" value="{{old('body')}}">
-                                <trix-editor input="body" class="form-control {{$errors->has('body') ? 'is-invalid':''}}"></trix-editor>
+                                <trix-editor input="body" name="content" class="form-control {{$errors->has('body') ? 'is-invalid':''}}"></trix-editor>
                                 @error('body')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror

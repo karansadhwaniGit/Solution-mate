@@ -10002,3 +10002,23 @@ h3 {
     border-color: #dee2e6;
   }
 }
+strong {
+  font-size: 1.2rem;
+}
+
+.answers {
+  padding: 10px;
+  border-radius: 5px;
+}
+.answers.answered {
+  border: solid 1px #38c172;
+  color: #38c172;
+}
+.answers.has-best-answer {
+  background: #38c172;
+  color: white;
+}
+.answers.unanswered {
+  background: #e3342f;
+  color: white;
+}

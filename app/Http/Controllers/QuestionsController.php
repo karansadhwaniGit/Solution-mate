@@ -37,7 +37,12 @@ class QuestionsController extends Controller
      */
     public function store(CreateQuestionRequest $request)
     {
-        dd($request);
+        auth()->user()->questions()->create([
+            'title'=>$request->title,
+            'body'=>$request->body
+        ]);
+        session()->flash('success','Question Posted Successfully!');
+        return redirect(route('questions.index'));
     }
 
     /**

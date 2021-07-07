@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <div class="media">
                                 <div class="mr-4 statistics">
-                                    <div class="vo tes text-center mb-3">
+                                    <div class="text-center mb-3">
                                         <strong class="d-block">{{$question->votes_count}}</strong> Votes
                                     </div>
                                     <div class="text-center mb-3 answers {{$question->answer_style}}">
