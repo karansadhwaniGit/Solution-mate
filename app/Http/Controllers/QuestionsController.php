@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Questions\CreateQuestionRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions=Question::simplePaginate(10);
+        $questions=Question::paginate(10);
         return view('questions.index',compact(['questions']));
     }
 
@@ -51,9 +52,10 @@ class QuestionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Question $question)
     {
-        //
+        $question->increment('views_count');
+        return view('questions.question');
     }
 
     /**
@@ -62,9 +64,9 @@ class QuestionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Question $question)
     {
-        //
+        return view('questions.edit',compact(['question']));
     }
 
     /**
@@ -74,9 +76,14 @@ class QuestionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateQuestionRequest $request,Question $question)
     {
-        //
+        $question->update([
+            'title'=>$request->title,
+            'body'=>$request->body
+        ]);
+        session()->flash('Question Updated Successfully!');
+        return redirect(route('questions.index'));
     }
 
     /**
@@ -85,8 +92,10 @@ class QuestionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question)
     {
-        //
+        $question->delete();
+        session()->flash('success','Question Deleted Successfully!');
+        return redirect(route('questions.index'));
     }
 }

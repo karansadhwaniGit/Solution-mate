@@ -32,6 +32,10 @@ class Question extends Model
     {
         return $this->created_at->diffForHumans();
     }
+    public function getWasUpdatedAttribute()
+    {
+        return $this->created_at != $this->updated_at;
+    }
     public function setTitleAttribute(string $title)
     {
         $this->attributes['title']=$title;
